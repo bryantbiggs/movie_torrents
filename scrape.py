@@ -3,12 +3,13 @@ import re
 import pandas as pd
 from bs4 import BeautifulSoup
 import codecs
-# url = 'http://www.boxofficemojo.com/'
-# html = requests.get(url).text
-# soup = BeautifulSoup(html, 'lxml')
 
 
 def movie_dollars():
+    '''
+    Takes webpage manually saved as html and outputs a clean csv of the movie financial data
+    '''
+
     url = "The Numbers - Movie Budgets.html"
 
     # use encoding='latin-1' to steamroll encoding issues
@@ -54,4 +55,40 @@ def movie_dollars():
         # drop out that squeaky clean
         movie_df.to_csv('movie_dollars.csv', sep=',', index=False)
 
-movie_dollars()
+def genres():
+    # http://www.boxofficemojo.com/genres/
+
+    url = 'http://www.boxofficemojo.com/genres/'
+    html = requests.get(url).text
+    soup = BeautifulSoup(html, 'lxml')
+
+    #soup.fin
+    #login_form = driver.find_element_by_xpath("/html/body/form[1]")
+    #tbl = [link.text for link in soup.select('b')]
+    #print(tbl)
+
+    #for tag in soup.find_all(re.compile(r'^./chart/?id=')):
+    #    print(tag.name)
+
+    # function to filter href tags by regex expression
+    def genre_title(href):
+        return href and re.compile("\.\/chart\/\?id\=").search(href)
+
+    # pull href tags based on filter
+    genre_hrefs = soup.find_all(href=genre_title)
+
+    # return list of genres
+    genre_lst = [re.sub('<[^>]+>', '', str(i)) for i in genre_hrefs]
+
+    # return list of links to navigate
+    genre_link_lst = [re.sub(r'(<[^>]+="./)', '', str(i)) for i in genre_hrefs]
+    genre_link_lst = [re.sub(r'(>[^>]+>)', '', str(i)) for i in genre_link_lst]
+
+    genre_tup = [(genre, link) for genre, link in zip(genre_lst, genre_link_lst)]
+    return genre_tup
+
+genres()
+
+#if __name__ is '__main__':
+#    movie_dollars()
+#    genres()
