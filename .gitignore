@@ -1,6 +1,8 @@
 # Don't save data to git
-.csv
-.txt
+*.csv
+*.txt
+*.html
+*.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
