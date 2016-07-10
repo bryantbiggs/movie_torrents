@@ -1,13 +1,23 @@
+from bs4 import BeautifulSoup
+import codecs
 import requests
 import re
 import pandas as pd
-from bs4 import BeautifulSoup
-import codecs
+import json
 
-def kat_crawl():
+#movie_lst = pd.read_csv('../data/movie_dollars.csv')
 
-    url = 'https://kat.cr/'
+#def kat_crawl():
 
+    #url = 'https://kat.cr/usearch/category:movies%20imdb:2488496/'
+    #driver = webdriver.Chrome(chromedriver)
+    #driver.get(url)
+
+    # enter search into search box
+    #search_box = driver.find_element_by_id('contentSearch')
+    #search_box.send_keys('Avatar')
+
+    #search_box.send_keys(Keys.RETURN)
 
 
     # use encoding='latin-1' to steamroll encoding issues
@@ -52,3 +62,52 @@ def kat_crawl():
 
         # drop out that squeaky clean
         #movie_df.to_csv('movie_dollars.csv', sep=',', index=False)
+
+def kat_crawl():
+    front = 'https://kat.cr/usearch/category:movies%20imdb:'
+    end = '/'
+
+    movie_lst = pd.read_csv('../data/movie_dollars.csv')
+    d = {}
+    bad_lst = []
+
+    #for imdb_num in movie_lst['imdb']:
+    imdb_num = '2488496'
+
+
+        # try api call with title as is (spaces, etc.)
+    url = front + imdb_num + end
+    soup = BeautifulSoup(requests.get(url).text, 'lxml')
+
+    result = soup.div.h2.span
+
+    result = re.sub(r'(<span>  results )([0-9*]\D[0-9*]*)( from )', '', str(result))
+    result = re.sub(r'(</span>)', '', result)
+    print(result)
+
+        #d[imdb_num] = html
+
+        # with each call, write to file
+        #with open('kat.json', 'w') as f:
+        #    json.dump(d, f)
+
+            # remove all special characters and replace whitespace with '+'
+            #movie_api = re.sub(r'[^a-zA-Z0-9 ]*', '', movie)
+            #movie_api = re.sub(' ', '+', movie_api)
+
+            #try:
+            #    # try api call with modified title
+            #    url = front + movie_api + end
+            #    html = requests.get(url).text
+            #    d[imdb_num] = html
+
+                # with each call, write to file
+            #    with open('movie.json', 'w') as f:
+            #        json.dump(d, f)
+            #except:
+            #    # show me any movies that didn't make the api call
+            #    print(movie)
+            #    bad_lst.append(movie)
+kat_crawl()
+if __name__ is '__main__':
+    kat_crawl()
