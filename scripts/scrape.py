@@ -9,7 +9,7 @@ def movie_dollars():
     Takes webpage manually saved as html and outputs a clean csv of the movie financial data
     '''
 
-    url = "The Numbers - Movie Budgets.html"
+    url = "../data/The Numbers - Movie Budgets.html"
 
     # use encoding='latin-1' to steamroll encoding issues
     with codecs.open(url, "r", encoding="latin-1") as fdata:
@@ -52,7 +52,7 @@ def movie_dollars():
         del movie_df['index']
 
         # drop out that squeaky clean
-        movie_df.to_csv('movie_dollars.csv', sep=',', index=False)
+        movie_df.to_csv('../data/movie_dollars.csv', sep=',', index=False)
 
 def mojo_genres():
     '''
