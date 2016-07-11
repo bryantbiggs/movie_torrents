@@ -6,7 +6,8 @@ import codecs
 
 def movie_dollars():
     '''
-    Takes webpage manually saved as html and outputs a clean csv of the movie financial data
+    input: webpage manually saved as html
+    output: a clean csv of the movie financial data
     '''
 
     url = "../data/The Numbers - Movie Budgets.html"
@@ -81,6 +82,7 @@ def mojo_genres():
     return genre_tup
 
 movie_dollars()
+
 if __name__ is '__main__':
     movie_dollars()
     mojo_genres()
