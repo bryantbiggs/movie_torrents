@@ -1,8 +1,6 @@
 import requests
 import re
 import pandas as pd
-import json
-from pprint import pprint
 import time
 
 def omdb_api_query():
