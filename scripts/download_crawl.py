@@ -10,6 +10,8 @@ def download_crawl():
     path = '../data/not_found.txt'
     if os.path.isfile(path): os.remove(path)
 
+    ct = 0
+
     # get omdb data frame
     omdb_data = pd.read_csv('../data/omdb_data.csv', encoding='latin-1')
 
@@ -25,23 +27,27 @@ def download_crawl():
         print(title + ' - ' + year + ' - ' + imdb_num)
 
         # kickass torrents cralwer
-        #omdb_data.loc[omdb_data.imdbID == imdb_num, 'Kat_Count'] = kat_crawl(imdb_num)
+        omdb_data.loc[omdb_data.imdbID == imdb_num, 'Kat_Count'] = kat_crawl(imdb_num)
 
         # pirate bay crawler
-        #omdb_data.loc[omdb_data.imdbID == imdb_num, 'Pirate_Count'] = pirate_crawl(imdb_num)
+        omdb_data.loc[omdb_data.imdbID == imdb_num, 'Pirate_Count'] = pirate_crawl(imdb_num)
 
         # extratorrent crawler
-        #omdb_data.loc[omdb_data.imdbID == imdb_num, 'Extra_Count'] = extratorrent_crawl(title, year)
+        omdb_data.loc[omdb_data.imdbID == imdb_num, 'Extra_Count'] = extratorrent_crawl(title, year)
 
         # torrentz (all) crawler
-        #omdb_data.loc[omdb_data.imdbID == imdb_num, 'Torrentz_Count'] = torrentz_crawl(title, year)
+        omdb_data.loc[omdb_data.imdbID == imdb_num, 'Torrentz_Count'] = torrentz_crawl(title, year)
 
         # torrentz (verified) crawler
-        #omdb_data.loc[omdb_data.imdbID == imdb_num, 'Torrentz_Ver_Count'] = torrentz_ver_crawl(title, year)
+        omdb_data.loc[omdb_data.imdbID == imdb_num, 'Torrentz_Ver_Count'] = torrentz_ver_crawl(title, year)
 
         # zoogle crawler
-        zoogle_crawl(title, year)
-        print('======================')
+        omdb_data.loc[omdb_data.imdbID == imdb_num, 'Zoogle_Ver_Count'] = zoogle_crawl(title, year)
+
+        ct += 1
+        print('---------------------------------')
+        print(str(len(omdb_data) - ct) + ' left')
+        print('---------------------------------')
 
         # write results to file
         omdb_data.to_csv('../data/torrent_data.csv', mode='w', index=False)
@@ -164,11 +170,7 @@ def zoogle_crawl(title, year):
         soup = BeautifulSoup(requests.get(url).text, 'lxml')
 
         result = soup.find_all('span')[5]
-        #result = str(result.split(' '))
-        #print(str(result))
-        #result = re.search(r'(?<=of >)([^)</span> >]+)', str(result))
-        #result = result.group(0)
-        #print(result)
+        result = str(result)[40:-8]
 
     except:
         # otherwise, return 0 and write to not found file
@@ -177,7 +179,7 @@ def zoogle_crawl(title, year):
         bad_return(path, output)
         result = 'Fail'
 
-    #print('Zoogle == ', result)
+    print('Zoogle == ', result)
     return result
 
 def bad_return(file, search_val):
