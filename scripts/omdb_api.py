@@ -16,7 +16,6 @@ def omdb_api_query():
     year = [year[:4] for year in movie_lst['release_date']]
     movie_tup = [(title, year) for title, year in zip(title, year)]
 
-    movie_dict = {}
     count = 0
 
     for title, year in movie_tup:
@@ -53,17 +52,21 @@ def omdb_api_query():
                     info.append(temp[1])
 
                 # add to dictionary
+                movie_dict = {}
                 movie_dict[title] = info
 
                 if count == 1:
                     # first time through, add labels
                     df = pd.DataFrame.from_dict(movie_dict, orient='index')
                     df.columns = labels
+
+                    # write to csv
+                    df.to_csv('../data/omdb_data.csv', mode='w', header=labels, index=False)
                 else:
                     df = pd.DataFrame.from_dict(movie_dict, orient='index')
+                    # write to csv
+                    df.to_csv('../data/omdb_data.csv', mode='a', header=False, index=False)
 
-                # write to csv
-                df.to_csv('../data/omdb_data.csv', mode='w', header=labels, index=False)
         except:
             with open('../data/not_found.txt', 'a') as f:
                 f.write(title + '\n')
