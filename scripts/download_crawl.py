@@ -13,7 +13,7 @@ def download_crawl():
     ct = 0
 
     # get omdb data frame
-    omdb_data = pd.read_csv('../data/omdb_data.csv', encoding='latin-1')
+    omdb_data = pd.read_csv('../data/omdb_data.csv', encoding='latin-1', error_bad_lines=False)
 
     imdb_num = omdb_data['imdbID']
     title = omdb_data['Title']
@@ -22,7 +22,7 @@ def download_crawl():
 
     for imdb_num, title, year in (movie_tup):
         # meter number of requests sent out
-        time.sleep(5)
+        time.sleep(3)
 
         print(title + ' - ' + year + ' - ' + imdb_num)
 
