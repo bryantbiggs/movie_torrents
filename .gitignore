@@ -1,6 +1,5 @@
 # Don't save data to git
 chromedriver
-*.csv
 *.txt
 
 
