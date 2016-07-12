@@ -2,6 +2,7 @@ import requests
 import re
 import pandas as pd
 import time
+import string
 
 def omdb_api_query():
     '''
@@ -26,7 +27,6 @@ def omdb_api_query():
 
             count += 1
             print(str(len(movie_tup)-count), html)
-
 
             if 'Error' in html:
                 with open('../data/not_found.txt', 'a') as f:
@@ -69,8 +69,23 @@ def omdb_api_query():
             with open('../data/not_found.txt', 'a') as f:
                 f.write(title + '\n')
 
+def modified_query():
 
-omdb_api_query()
+    # load financial omdb data into dataframe
+    movie_lst = pd.read_csv('../data/movie_dollars.csv', encoding='latin-1')
+    movie_lst['year'] = pd.to_datetime(movie_lst['release_date'])
+
+    # remove punctuation
+    movie_lst['strip_title'] = movie_lst['title'].apply(lambda x:''.join([i for i in x if i not in string.punctuation]))
+
+    with open('../data/not_found.txt', encoding='latin-1') as f:
+        #titles = [line.strip() for line.apply(lambda x:''.join([i for i in x if i not in string.punctuation])) in f]
+        titles = [''.join(x) for x in title if x not in string.punctuation for title in f]
+
+    #print(movie_lst.loc[movie_lst['title'] == titles])
+    print(titles)
+
+modified_query()
 
 if __name__ is '__main__':
     omdb_api_query()
