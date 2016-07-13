@@ -6,7 +6,7 @@ matplotlib.style.use('ggplot')
 
 def clean():
        torrent_df = pd.read_csv('../data/torrent_data.csv', encoding='latin-1')
-       torrent_df = torrent_df[['Title', 'Released', 'Genre', 'Director', 'Actors', 'Pirate_Count', 'Torrentz_Count', 'Zoogle_Ver_Count']]
+       torrent_df = torrent_df[['Title', 'Released', 'Rated', 'Genre', 'Director', 'Actors', 'Pirate_Count', 'Torrentz_Count', 'Zoogle_Ver_Count']]
        # convert to datetime
        torrent_df['Released'] = pd.to_datetime(torrent_df['Released'])
        print('Data points of torrent_df = ' + str(len(torrent_df)))
@@ -21,7 +21,6 @@ def clean():
        # merge data frames
        data_df = pd.merge(financial_df, torrent_df, how='inner', on=['Title', 'Released'])
        print('Data points AFTER merge, BEFORE clean = ' + str(len(data_df)))
-
 
        # drop empty cells
        data_df = data_df.replace('', np.nan, regex=True)
