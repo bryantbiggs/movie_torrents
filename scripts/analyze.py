@@ -6,9 +6,11 @@ matplotlib.style.use('ggplot')
 
 def clean():
        torrent_df = pd.read_csv('../data/torrent_data.csv', encoding='latin-1')
-       torrent_df = torrent_df[['Title', 'Released', 'Rated', 'Genre', 'Director', 'Actors', 'Pirate_Count', 'Torrentz_Count', 'Zoogle_Ver_Count']]
+       torrent_df = torrent_df[['Title', 'Rated', 'Released', 'Runtime', 'Genre', 'Director', 'Actors', 'Pirate_Count', 'Torrentz_Count', 'Zoogle_Ver_Count']]
        # convert to datetime
        torrent_df['Released'] = pd.to_datetime(torrent_df['Released'])
+       # convert to number
+       torrent_df['Runtime'] = torrent_df['Runtime'].str.rstrip(' min')
        print('Data points of torrent_df = ' + str(len(torrent_df)))
 
        financial_df = pd.read_csv('../data/movie_dollars.csv', encoding='latin-1')
