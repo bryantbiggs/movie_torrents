@@ -43,7 +43,7 @@ def clean():
        data_df['Total_Torrents'] = data_df[['Pirate_Count', 'Torrentz_Count', 'Zoogle_Ver_Count']].sum(axis=1)
 
        # trim to pertinent columns
-       data_df = data_df[['Title', 'Released', 'Year', 'Month', 'Rated', 'Runtime', 'Genre', 'Director', 'Actors', 'Total_Torrents']]
+       data_df = data_df[['Title', 'Prod_Budget', 'Released', 'Year', 'Month', 'Rated', 'Runtime', 'Genre', 'Director', 'Actors', 'Total_Torrents']]
 
        train_df, test_df = train_test_split(data_df, train_size=0.80, random_state=1)
 
