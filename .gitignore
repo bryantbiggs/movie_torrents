@@ -1,9 +1,7 @@
-# Don't save data to git
-chromedriver
-*.txt
-
-
+# Pixiedust
+metastore_db/
 *.idea/
+*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

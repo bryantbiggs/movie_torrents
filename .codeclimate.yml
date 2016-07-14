@@ -1,0 +1,30 @@
+---
+engines:
+  pep8:
+    enabled: true
+
+  duplication:
+    enabled: true
+    config:
+      languages:
+        python:
+          mass_threshold: 50
+  fixme:
+    enabled: true
+
+  radon:
+    enabled: true
+
+ratings:
+  paths:
+  - "**.py"
+
+exclude_paths:
+  - "**.ipynb"
+  - "**.txt"
+  - "**.log"
+  - "**.md"
+  - "**.key"
+  - "LICENSE"
+  - "static/*"
+  - ".pylintrc"
