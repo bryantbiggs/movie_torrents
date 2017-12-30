@@ -9,7 +9,7 @@ beautifulsoup4 == 4.6.0
 fuzzywuzzy==0.16.0
 
 # src/aggregate.py: 5
-numpy == 1.13.1
+numpy==1.13.3
 
 # src/aggregate.py: 4
 # src/my_aws.py: 6
