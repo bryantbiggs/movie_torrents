@@ -6,7 +6,7 @@
 beautifulsoup4==4.6.3
 
 # src/aggregate.py: 6
-fuzzywuzzy==0.16.0
+fuzzywuzzy==0.17.0
 
 # src/aggregate.py: 5
 numpy==1.13.3
