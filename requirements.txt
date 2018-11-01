@@ -9,7 +9,7 @@ beautifulsoup4==4.6.3
 fuzzywuzzy==0.17.0
 
 # src/aggregate.py: 5
-numpy==1.15.2
+numpy==1.15.3
 
 # src/aggregate.py: 4
 # src/my_aws.py: 6
@@ -21,7 +21,7 @@ pandas==0.23.4
 # src/numbers_scraper.py: 4
 # src/omdb_api.py: 7
 # src/torrents.py: 6
-requests==2.19.1
+requests==2.20.0
 
 # src/my_aws.py: 7
 s3fs==0.1.6
