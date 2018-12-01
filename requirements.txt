@@ -24,4 +24,4 @@ pandas==0.23.4
 requests==2.20.1
 
 # src/my_aws.py: 7
-s3fs==0.1.6
+s3fs==0.2.0
