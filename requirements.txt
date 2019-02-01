@@ -3,7 +3,7 @@
 
 # src/numbers_scraper.py: 6
 # src/torrents.py: 8
-beautifulsoup4==4.7.0
+beautifulsoup4==4.7.1
 
 # src/aggregate.py: 6
 fuzzywuzzy==0.17.0
