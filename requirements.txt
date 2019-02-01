@@ -16,7 +16,7 @@ numpy==1.16.1
 # src/numbers_scraper.py: 5
 # src/omdb_api.py: 8
 # src/torrents.py: 7
-pandas==0.23.4
+pandas==0.24.0
 
 # src/numbers_scraper.py: 4
 # src/omdb_api.py: 7
