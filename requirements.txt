@@ -3,20 +3,20 @@
 
 # src/numbers_scraper.py: 6
 # src/torrents.py: 8
-beautifulsoup4==4.7.0
+beautifulsoup4==4.7.1
 
 # src/aggregate.py: 6
 fuzzywuzzy==0.17.0
 
 # src/aggregate.py: 5
-numpy==1.15.4
+numpy==1.16.1
 
 # src/aggregate.py: 4
 # src/my_aws.py: 6
 # src/numbers_scraper.py: 5
 # src/omdb_api.py: 8
 # src/torrents.py: 7
-pandas==0.23.4
+pandas==0.24.0
 
 # src/numbers_scraper.py: 4
 # src/omdb_api.py: 7
